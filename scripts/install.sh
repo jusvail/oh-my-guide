@@ -53,13 +53,15 @@ check_sources()
 
     for term in "vec""tori" "r""tk"; do
         match="$(grep -Ril --exclude-dir=.git --exclude-dir=.tasks -- "${term}" \
-            "${root}/.opencode" "${root}/preferences" "${root}/releases" "${root}/scripts" \
+            "${root}/.opencode/agents" "${root}/.opencode/commands" "${root}/.opencode/skills" \
+            "${root}/preferences" "${root}/releases" "${root}/scripts" \
             "${root}/templates" "${root}/README.md" "${root}/AGENTS.md" || true)"
         [[ -z "${match}" ]] || fail "Found prohibited package-specific content: ${match}"
     done
 
     for term in "/""tmp" "/""var/"; do
-        match="$(grep -RIl -- "${term}" "${root}/.opencode" "${root}/preferences" \
+        match="$(grep -RIl -- "${term}" "${root}/.opencode/agents" "${root}/.opencode/commands" \
+            "${root}/.opencode/skills" "${root}/preferences" \
             "${root}/releases" "${root}/scripts" "${root}/templates" "${root}/README.md" \
             "${root}/AGENTS.md" || true)"
         [[ -z "${match}" ]] || fail "Found an absolute system scratch path: ${match}"
