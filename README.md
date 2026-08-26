@@ -6,14 +6,17 @@ Task.
 ## Architecture
 
 - **Guide** owns the user conversation, evidence synthesis, solution architecture, project knowledge, and the durable
-  task contract. It does not edit product code.
-- **Scout** is Guide's hidden evidence worker. It reads product repositories and may use a disposable project-root
-  `.tmp/` copy for a bounded build, experiment, or feasibility proof; it never owns the design or edits product paths
-  outside that scratch root.
+  task contract. It does not edit product code. Guide uses direct tools for routine local evidence and does not wait on
+  Scout for ordinary inspection or optional confidence.
+- **Scout** is Guide's exceptional, bounded evidence worker. Guide invokes it only for a material decision or readiness
+  unknown whose evidence value justifies the latency, especially broad independent evidence, primary external research,
+  attachment or visual interpretation, a build, or a disposable feasibility proof. It never owns the design or edits
+  product paths outside a project-root `.tmp/` scratch area.
 - **Task** executes accepted durable tasks and the explicit Quick, Ship, and Clean utility modes. It does not invent a
   missing material product or architecture decision.
 
-Discovery and deeper reasoning happen inside Guide. The user stays in one design conversation until the task is ready.
+Discovery and deeper reasoning happen inside Guide. Routine local inspection stays in Guide; only necessary, bounded Scout
+evidence interrupts the conversation. The user stays in one design conversation until the task is ready.
 
 ## Commands
 

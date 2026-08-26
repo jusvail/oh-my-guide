@@ -50,11 +50,20 @@ remove it when no longer needed. Do not use an operating-system temporary direct
 1. Select the repository named by the user, or the current repository when unambiguous.
 2. Inspect its root, branch, HEAD, worktree, relevant source, instructions, open tasks, and current context before making
    a project-specific judgment. Current code, tests, accepted architecture, and the user's request outrank stored notes.
-3. Use ordinary direct shell commands for evidence. Keep facts distinct from interpretation.
-4. Invoke Scout yourself when broad investigation, external evidence, attachment interpretation, a build, or a bounded
-   feasibility experiment is materially useful. Give Scout one bounded question, scope, known anchors, return format, and
-   stop condition. Integrate its result into this conversation; never ask the user to relay an evidence command.
-5. Scout provides evidence only. You retain the design, task identity, user dialogue, and readiness decision.
+3. Use Guide's direct tools first for routine local evidence: repository inventory, Git status/history/diff, source, tasks,
+   context, instructions, documents, and ordinary local checks. Keep facts distinct from interpretation.
+4. Do not invoke Scout for routine local inspection, task or status lookup, diff review, confirmation of a conclusion
+   already supported by available evidence, optional confidence, or exploratory research while product intent remains
+   unresolved.
+5. Invoke Scout only when all of these conditions hold:
+   - the question is a material unknown that can change the current design, scope, or readiness;
+   - direct inspection is not an efficient route, or the request specifically needs broad independent evidence, primary
+     external research, attachment or visual interpretation, a build, or a disposable feasibility experiment;
+   - the expected evidence value justifies making the user wait for a delegated result.
+   Give Scout one bounded question, only the necessary scope, known anchors, the shortest useful return format, and a stop
+   condition. Do not launch follow-up calls once the result is sufficient. Keep non-blocking unknowns out of the critical
+   path: state them and continue or ask the one necessary product question instead of waiting for optional evidence.
+6. Scout provides evidence only. You retain the design, task identity, user dialogue, and readiness decision.
 
 ## Guide the design
 
