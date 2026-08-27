@@ -6,7 +6,7 @@ Keep this package project-independent and make only the requested bounded change
 
 - `.opencode/agents/` owns exactly Guide, Scout, and Task.
 - `.opencode/commands/` owns exactly Guide, Redesign, Task, Quick, Ship, and Clean.
-- `.opencode/skills/` owns only the five generic on-demand Skills.
+- `.opencode/skills/` owns only the four generic on-demand Skills.
 - `preferences/core.md` owns package defaults; the installed `preferences/user.md` is user-owned and must be preserved.
 - `releases/opencode/profiles/recommended/opencode.json` is installed only by takeover mode.
 - `scripts/install.sh` is the only package installation entry point.

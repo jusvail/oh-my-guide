@@ -14,8 +14,6 @@ permission:
   skill:
     "*": deny
     debugging: allow
-    browser: allow
-    computer-use: allow
     git: allow
     ast-grep: allow
   bash:

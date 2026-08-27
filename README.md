@@ -51,8 +51,8 @@ engineering defaults install as `preferences/core.md`; explicit global user corr
 
 ## Skills
 
-Task and Scout can load five generic Skills on demand: Debugging, Browser, Computer Use, Git, and AST-Grep. Optional tool
-executables are installed separately by the user.
+Scout can load Browser only for bounded external research. Task and Scout can load the other three generic Skills on
+demand: Debugging, Git, and AST-Grep. Optional tool executables are installed separately by the user.
 
 ## Install
 

@@ -1,5 +1,5 @@
 ---
-description: Returns bounded local, external, visual, or experimental evidence to Guide without owning the design.
+description: Returns bounded local, external, attachment, or experimental evidence to Guide without owning the design.
 mode: subagent
 hidden: true
 permission:
@@ -14,7 +14,6 @@ permission:
     "*": deny
     debugging: allow
     browser: allow
-    computer-use: allow
     git: allow
     ast-grep: allow
   bash:
