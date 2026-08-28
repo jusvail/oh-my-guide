@@ -1,85 +1,102 @@
 # oh-my-guide
 
-A project-independent OpenCode workflow built around one continuous Guide, one bounded Scout, and one execution-focused
-Task.
+A project-independent, evidence-grounded workflow for OpenCode and Codex. Guide owns intent and design; durable tasks
+separate accepted architecture from execution.
 
-## Architecture
+## Shared workflow
 
-- **Guide** owns the user conversation, evidence synthesis, solution architecture, project knowledge, and the durable
-  task contract. It does not edit product code. Guide uses direct tools for routine local evidence and does not wait on
-  Scout for ordinary inspection or optional confidence.
-- **Scout** is Guide's exceptional, bounded evidence worker. Guide invokes it only for a material decision or readiness
-  unknown whose evidence value justifies the latency, especially broad independent evidence, primary external research,
-  attachment or visual interpretation, a build, or a disposable feasibility proof. It never owns the design or edits
-  product paths outside a project-root `.tmp/` scratch area.
-- **Task** executes accepted durable tasks and the explicit Quick, Ship, and Clean utility modes. It does not invent a
-  missing material product or architecture decision.
+- **Guide** owns the user conversation, evidence synthesis, solution architecture, project knowledge, and durable task
+  contract. It does not edit product code.
+- **Task execution** adopts an accepted contract, edits its complete scope, and validates the final worktree without
+  inventing material product decisions.
+- `.tasks/` is the only cross-session ledger. There are no execution locks, Session owners, checkpoints, handoff states,
+  or paused tasks.
 
-Discovery and deeper reasoning happen inside Guide. Routine local inspection stays in Guide; only necessary, bounded Scout
-evidence interrupts the conversation. The user stays in one design conversation until the task is ready.
+Each independently executable objective uses `.tasks/open/YYYYMMDD-short-slug.md` with Goal, Acceptance, Design, Scope,
+Execution slices, Current state, Validation, and concise Decisions. Status is `designing`, `ready`, `active`, or `blocked`;
+queue is independently `current` or `deferred`. Terminal tasks move to `.tasks/archive/YYYY-MM/`.
 
-## Commands
+## OpenCode
 
-- `/guide <thought>` — continue interactive, evidence-grounded design.
-- `/redesign <objective>` — preserve accepted behavior while deriving a replacement structure with the same Guide.
-- `/task <task-id>` — start or adopt one accepted durable task.
-- `/quick <request>` — execute one small, self-contained change without durable task state.
-- `/ship [message]` — inspect, stage all current changes, commit, and push without implicit installation or release.
-- `/clean [all]` — remove stale OpenCode Sessions, or every Session except the current one.
+The OpenCode release remains built around three Agents:
 
-Task lists and status, project Context, global user Preferences, and project Instructions are natural-language Guide
-capabilities. Writes require explicit words such as “save”, “remember”, “defer”, “cancel”, or “supersede”.
+- **Guide** performs routine inspection directly and invokes the bounded **Scout** only for material external, visual,
+  build, or feasibility evidence whose value justifies delegation.
+- **Scout** returns evidence without owning design, implementation, or user dialogue.
+- **Task** is the execution engine for accepted work and explicit utility commands.
 
-Agents never write outside the opened project unless the user's current request explicitly names that external effect.
-All implicit scratch copies, screenshots, logs, and generated validation files live under project-root `.tmp/` so the
-same contract works across operating systems.
+Commands remain unchanged:
 
-## Durable tasks
+- `/guide <thought>` and `/redesign <objective>` — continue design.
+- `/task <task-id>` — execute an accepted durable task.
+- `/quick <request>` — execute one small, self-contained change.
+- `/ship [message]` — inspect, stage, commit, and push.
+- `/clean [all]` — remove stale OpenCode Sessions or every Session except the current one.
 
-Each independently executable objective uses one `.tasks/open/YYYYMMDD-short-slug.md` file containing Goal, Acceptance,
-Design, Scope, Execution slices, Current state, Validation, and concise material Decisions. Status is `designing`,
-`ready`, `active`, or `blocked`; queue is independently `current` or `deferred`. Completed, cancelled, and superseded
-tasks move to `.tasks/archive/YYYY-MM/`.
+OpenCode package defaults live in `preferences/core.md`; the installed `preferences/user.md` remains user-owned. Its four
+on-demand Skills are Browser, Debugging, Git, and AST-Grep.
 
-There are no execution locks, Session owners, recovery snapshots, handoff states, or paused tasks. A fresh
-`/task <task-id>` adopts `ready`, `active`, or `blocked` work from the live repository. Successful objective and validation
-completion archives the task automatically unless its contract explicitly requires subjective user review.
+## Codex
 
-Project context lives in `.tasks/context.md`. Project-specific instructions live in `docs/instructions/`. Package-owned
-engineering defaults install as `preferences/core.md`; explicit global user corrections live in the separately owned
-`preferences/user.md`.
+The Codex release contains one Skill, `oh-my-guide`, and no custom Agent, plugin, slash command, or Scout runtime.
+Installation adds a marked block to the active global Codex instruction file so every fresh conversation silently starts
+in Guide. The user enters only the natural request—no Skill prefix, bootstrap prompt, or activation message is required.
 
-## Skills
+Explicit modes are available when Guide has made work executable:
 
-Scout can load Browser only for bounded external research. Task and Scout can load the other three generic Skills on
-demand: Debugging, Git, and AST-Grep. Optional tool executables are installed separately by the user.
+- `$oh-my-guide redesign <objective>` — derive replacement structure from accepted behavior.
+- `$oh-my-guide task <task-id>` — accept and execute one durable task.
+- `$oh-my-guide quick <request>` — execute one bounded decision-free change.
+- `$oh-my-guide ship [message]` — inspect, stage, commit, and push.
+
+Codex Skills cannot enforce OpenCode-style per-Agent tool permissions, so Guide-versus-execution separation is an
+instruction contract under Codex's sandbox and approval policy. Codex has no oh-my-guide Session-cleaning mode.
+
+### Superpowers compatibility
+
+Superpowers does not need to be uninstalled. Default Guide owns process selection, preventing automatic Superpowers
+brainstorming, planning, TDD, worktree, subagent, review, and branch-finishing workflows from creating a competing process
+for the same objective. Explicitly invoking a Superpowers Skill or asking to use Superpowers suspends oh-my-guide for that
+objective, so the plugin remains available without either package modifying the other.
 
 ## Install
 
-Validate without writing outside the repository:
+Validate both release sources without installation:
 
 ```bash
 bash scripts/install.sh --check
 ```
 
-Install additively into `~/.config/opencode`:
+Install OpenCode additively into `~/.config/opencode`:
 
 ```bash
 bash scripts/install.sh
 ```
 
-Default installation updates only files recorded in the package manifest. It preserves unrelated Agents, commands,
-Skills, scripts, Preferences, plugins, instructions, and `opencode.json`. Agent files do not prescribe models, so the
-user's current OpenCode model remains authoritative.
-
-Explicit takeover replaces global Agent, command, and Skill directories and writes the recommended model profile:
+Default OpenCode installation updates only manifest-owned files and preserves unrelated Agents, commands, Skills,
+scripts, Preferences, plugins, instructions, and `opencode.json`. Explicit takeover keeps its existing behavior:
 
 ```bash
 bash scripts/install.sh --takeover
 ```
 
-Takeover still touches only the selected global OpenCode root. It never modifies a project repository and preserves
-`preferences/user.md`. Set `OH_MY_GUIDE_OPENCODE_DIR="$PWD/.tmp/opencode"` to validate against a project-local isolated
-destination.
+Install only the Codex release:
 
-Restart OpenCode after installation.
+```bash
+bash scripts/install.sh --codex
+```
+
+Codex installation updates only `$HOME/.agents/skills/oh-my-guide`, its package manifest, and one marked block at the
+start of the active global `${CODEX_HOME:-$HOME/.codex}/AGENTS.override.md` or `AGENTS.md`. It preserves all content outside
+that block and never edits Codex configuration, plugins, project instructions, or Superpowers files.
+
+Use project-local destinations for isolated installation checks:
+
+```bash
+OH_MY_GUIDE_OPENCODE_DIR="$PWD/.tmp/opencode" bash scripts/install.sh
+OH_MY_GUIDE_CODEX_SKILLS_DIR="$PWD/.tmp/agents/skills" \
+OH_MY_GUIDE_CODEX_DIR="$PWD/.tmp/codex" \
+bash scripts/install.sh --codex
+```
+
+Restart the selected application after installation.
