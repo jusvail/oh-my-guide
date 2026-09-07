@@ -5,7 +5,7 @@ shopt -s nullglob
 
 root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 agents=(guide scout task)
-commands=(guide redesign task quick ship clean)
+commands=(guide redesign task quick reduce ship clean)
 skills=(debugging browser git ast-grep)
 codex_skill_name="oh-my-guide"
 codex_owned=(

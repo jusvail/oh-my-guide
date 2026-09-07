@@ -16,6 +16,18 @@ Each independently executable objective uses `.tasks/open/YYYYMMDD-short-slug.md
 Execution slices, Current state, Validation, and concise Decisions. Status is `designing`, `ready`, `active`, or `blocked`;
 queue is independently `current` or `deferred`. Terminal tasks move to `.tasks/archive/YYYY-MM/`.
 
+Guide accepts rough ideas, recommends meaningful options, and automatically updates task state as discussion changes the
+requirements. Task updates need no save request; saving long-term context or instructions remains explicit. A ready task
+has no unresolved material product or architecture choice, and Guide supplies its execution command and dependency order.
+
+Design and execution prioritize verified reuse. Project-mandated components are binding; new structure needs a demonstrated
+capability gap. Reduction targets unnecessary code, state, and work while preserving behavior, not a line-count quota.
+
+`reduce` is an execution entry, while `redesign` develops replacement architecture and `clean` removes OpenCode Sessions.
+Select a directory, subsystem, current diff, or explicitly the whole repository. Reduce records a normal durable task,
+works through verifiable slices, and can resume via its task ID. It reports actual coverage, retained uncertainty, and
+validation; an omitted scope never silently authorizes a whole-repository edit. No extra Agent or Skill is involved.
+
 ## OpenCode
 
 The OpenCode release remains built around three Agents:
@@ -25,11 +37,12 @@ The OpenCode release remains built around three Agents:
 - **Scout** returns evidence without owning design, implementation, or user dialogue.
 - **Task** is the execution engine for accepted work and explicit utility commands.
 
-Commands remain unchanged:
+Available commands:
 
 - `/guide <thought>` and `/redesign <objective>` — continue design.
 - `/task <task-id>` — execute an accepted durable task.
 - `/quick <request>` — execute one small, self-contained change.
+- `/reduce <scope>` — directly simplify existing code while preserving required behavior.
 - `/ship [message]` — inspect, stage, commit, and push.
 - `/clean [all]` — remove stale OpenCode Sessions or every Session except the current one.
 
@@ -42,15 +55,21 @@ The Codex release contains one Skill, `oh-my-guide`, and no custom Agent, plugin
 Installation adds a marked block to the active global Codex instruction file so every fresh conversation silently starts
 in Guide. The user enters only the natural request—no Skill prefix, bootstrap prompt, or activation message is required.
 
-Explicit modes are available when Guide has made work executable:
+Explicit modes:
 
 - `$oh-my-guide redesign <objective>` — derive replacement structure from accepted behavior.
 - `$oh-my-guide task <task-id>` — accept and execute one durable task.
 - `$oh-my-guide quick <request>` — execute one bounded decision-free change.
+- `$oh-my-guide reduce <scope>` — directly perform scoped behavior-preserving cleanup.
 - `$oh-my-guide ship [message]` — inspect, stage, commit, and push.
 
 Codex Skills cannot enforce OpenCode-style per-Agent tool permissions, so Guide-versus-execution separation is an
 instruction contract under Codex's sandbox and approval policy. Codex has no oh-my-guide Session-cleaning mode.
+
+The instructions target GPT-5.6 Sol and GPT-6 Astra with the same outcome-led contract: clear reuse constraints, progressive
+Guide dialogue, autonomous local execution, and proportional validation. Descriptions do not select a model. Codex uses
+the user's runtime selection; the OpenCode recommended profile retains its existing models until provider availability
+for a revised mapping is verified. Static package checks do not establish model behavior or prompt efficacy.
 
 ### Superpowers compatibility
 

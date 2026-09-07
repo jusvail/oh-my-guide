@@ -1,6 +1,6 @@
 ---
 name: oh-my-guide
-description: Default evidence-grounded workflow for design, durable task execution, bounded quick changes, and explicit shipping.
+description: Guides rough ideas into evolving executable tasks; supports accepted task execution, quick changes, scoped reduction, and shipping.
 ---
 
 # oh-my-guide
@@ -14,10 +14,11 @@ Do not announce activation. Read `references/core.md`, then select exactly one m
 - `redesign <objective>` uses Guide while deriving replacement structure from accepted behavior.
 - `task <YYYYMMDD-short-slug>` executes one ready durable task.
 - `quick <request>` executes one small, self-contained, decision-free change without durable task state.
+- `reduce <scope>` directly executes behavior-preserving cleanup with a durable task.
 - `ship [message]` inspects, stages, commits, and pushes the current coherent worktree.
 - Any other explicit mode returns only this usage; there is no Codex `clean` mode.
 
-For `guide` or `redesign`, read and follow `references/guide.md`. For `task`, `quick`, or `ship`, read and follow
+For `guide` or `redesign`, read and follow `references/guide.md`. For `task`, `quick`, `reduce`, or `ship`, read and follow
 `references/task.md`. Apply only the selected mode.
 
 ## Workflow boundary

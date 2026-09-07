@@ -11,9 +11,15 @@ updated: YYYY-MM-DD
 
 ## Acceptance
 
+<!-- Observable results and binding project/component constraints. -->
+
 ## Design
 
+<!-- Concrete reuse paths/symbols; necessary additions and demonstrated gaps. Distinguish proposals from decisions. -->
+
 ## Scope
+
+<!-- Included paths/behavior and prohibited substitutes or unrelated cleanup. -->
 
 ## Execution slices
 
@@ -21,6 +27,10 @@ updated: YYYY-MM-DD
 
 ## Current state
 
+<!-- Replace with material unresolved issues, progress, and the next action. -->
+
 ## Validation
+
+<!-- Evidence for behavior and reuse constraints; baseline failures and unverified conditions. -->
 
 ## Decisions

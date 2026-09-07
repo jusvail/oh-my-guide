@@ -5,7 +5,7 @@ Keep this package project-independent and make only the requested bounded change
 ## Canonical package
 
 - `.opencode/agents/` owns exactly Guide, Scout, and Task.
-- `.opencode/commands/` owns exactly Guide, Redesign, Task, Quick, Ship, and Clean.
+- `.opencode/commands/` owns exactly Guide, Redesign, Task, Quick, Reduce, Ship, and Clean.
 - `.opencode/skills/` owns only Browser, Debugging, Git, and AST-Grep.
 - `preferences/core.md`, the OpenCode profile, templates, and existing helpers retain their current ownership.
 - `releases/codex/skills/oh-my-guide/` owns exactly one Codex Skill; `releases/codex/default-guide.md` owns its silent

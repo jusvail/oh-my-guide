@@ -2,7 +2,7 @@
 
 ## Current
 
-### Proposed
+### Designing
 
 None.
 
@@ -11,10 +11,6 @@ None.
 None.
 
 ### Active
-
-None.
-
-### Paused
 
 None.
 
@@ -24,7 +20,7 @@ None.
 
 ## Deferred
 
-### Proposed
+### Designing
 
 None.
 
@@ -33,10 +29,6 @@ None.
 None.
 
 ### Active
-
-None.
-
-### Paused
 
 None.
 
