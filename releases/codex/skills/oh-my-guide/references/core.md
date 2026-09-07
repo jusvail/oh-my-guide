@@ -3,6 +3,10 @@
 Repository instructions, current code, accepted architecture, and the user's current request remain more specific than
 this package default.
 
+In explicit Reduce, the user authorizes replacement of internal architecture within scope. Current code and ownership
+are evidence, not preservation requirements; derive and record the simpler design before editing without another approval.
+Required behavior, public contracts, data semantics, and explicitly mandated project components still govern the result.
+
 ## Work from the result
 
 - State the desired observable result, acceptance, scope, and exclusions before implementation.

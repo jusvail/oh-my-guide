@@ -1,7 +1,7 @@
 # Execution modes
 
-Apply the selected `task`, `quick`, `reduce`, or `ship` mode. Reduce may choose local behavior-preserving simplifications;
-do not invent material architecture, delegate, or repeat permission already granted by the invocation.
+Apply the selected `task`, `quick`, `reduce`, or `ship` mode. Reduce authorizes internal architecture redesign under its
+preservation contract; other modes retain their accepted boundaries. Do not delegate or repeat granted permission.
 
 Never create or modify a file outside the opened project unless the request explicitly names that external effect. Put
 implicit scratch files, logs, screenshots, generated validation artifacts, and temporary copies under project-root
@@ -13,18 +13,20 @@ Implementation and reduction checks below apply to `task`, `quick`, and `reduce`
 
 - For `task`, `quick`, and `reduce`, inspect the repository root, branch, HEAD, worktree, relevant source, loaded `AGENTS.md` files,
   current task/context, and available validation before editing. Preserve unrelated work.
-- Implement the accepted result directly. Local syntax is yours; material ownership, API, schema, persistence,
-  compatibility, scope, and sequencing are not yours to invent.
+- Implement the accepted result directly. In ordinary Task/Quick, local implementation details are yours; material
+  ownership, interfaces, data semantics, compatibility, scope, and sequencing remain bound to the accepted design.
+  Reduce may redesign internal architecture under its own contract, including when resuming that recorded task.
 - If a material decision blocks required work, record the contradiction or missing decision as `blocked` rather than
   guessing. In Reduce, continue independent supported candidates first.
 - Do not author tests, fixtures, mocks, snapshots, or test-only helpers unless the task explicitly requests test code.
 - Read reuse anchors from the contract or current request before editing; inspect definitions and calls before declaring a gap.
-  Never silently substitute for mandated components. Extend the real owner only within accepted scope; record a material
+  Never silently substitute for mandated components. Reuse existing capabilities within the authorized design; record a material
   contradiction instead of inventing a fallback. Routine local implementation decisions remain yours.
 - Implement coherent slices using existing capabilities and authoritative state. Review task-owned changes for unnecessary
   layers, duplicate state, speculative flexibility, and unrelated edits as you proceed. Use bounded ablation/delta-reduction
   experiments on plausible removable parts, not every line; preserve required behavior and restore only your failed change.
-  Unverified behavior is not evidence for deletion, and other user work must remain intact.
+  Missing evidence alone does not justify deletion; Reduce defers GUI acceptance to the user as specified below.
+  Other user work must remain intact.
 - Inspect the final diff and map acceptance to direct final-worktree evidence. Run required, proportional validation; expand
   or repeat it only for new changes, failures, or unresolved concerns. Briefly report concrete reuse, material additions and
   their necessity, useful reductions, and verification limits. Never remove tests to obtain a pass.
@@ -51,33 +53,62 @@ implement, self-review, validate, and report without durable task state.
 
 ## `reduce`
 
-Invocation authorizes scoped, semantics-preserving cleanup, including its local reduction design, edits, and validation;
-no separate Guide/Task approval is required. Preserve product behavior, public contracts, integrations, required controls,
-and relevant nonfunctional constraints. Material product or architecture changes remain outside this authority.
+Invocation authorizes autonomous internal architecture redesign and code reduction within the selected scope. Reassign
+internal responsibilities/state ownership, redesign internal interfaces, merge modules, and replace redundant architecture
+when that removes complexity. Current files, types, ownership splits, and call graphs are evidence, not constraints to
+preserve. Record the simpler design in the same task and execute; no additional Guide/Redesign approval is required.
+Preserve required product behavior, public contracts, persisted-data meaning, lifecycle/concurrency semantics, integrations,
+and mandated components. Ask only for changed requirements or real user-facing tradeoffs, not internal design decisions.
 
-1. Resolve scope from the supplied paths, subsystem, current diff, or unambiguous context. If missing, inspect only enough
-   to identify the choice and ask for scope in plain text before editing. Never default to a whole-repository edit. Exclude
-   unrelated user changes and generated/vendor code unless explicitly included.
-2. Create or resume one ordinary `.tasks/open/YYYYMMDD-short-slug.md` contract with a unique ID and the existing schema:
-   Goal, Acceptance, Design, Scope, Execution slices, Current state, Validation, Decisions; frontmatter id, status, queue,
-   depends_on, created, updated. Use queue current and empty dependencies unless real prerequisites apply.
-   Record behavior to preserve, reuse anchors, scope, slices, baseline checks/failures, and uncertainties before edits;
-   set executable work active and update the index. This mode may derive local simplifications under those constraints.
-3. Apply Program Reduction in dependency order, skipping inapplicable passes: trace outputs and side effects backward
-   (Program Slicing); remove verified unnecessary work and duplicate implementations through reuse; reduce redundant state
-   and synchronization (Out of the Tar Pit); collapse unjustified layers, branches, and hypothetical flexibility (YAGNI).
-   Do not remove state whose lifecycle, concurrency, or measured performance role requires it.
-4. Use ablation/delta-reduction thinking to validate bounded removal hypotheses against relevant behavior. Keep supported
-   reductions; narrow a failed experiment to isolate what is necessary, restoring your failed edits. Unknown results are
-   not permission to delete. Distinguish baseline failures from regressions; static checks alone do not prove runtime or
-   visual equivalence. No exhaustive deletion search or mandatory full-repository sweep per theory.
-5. For an explicitly selected large repository, inventory boundaries and work sequentially through verifiable subsystem
-   slices. Keep progress, coverage, retained candidates/reasons, and validation in the same task. Continue independent
-   supported reductions when one candidate is uncertain; do not quietly expand scope or redesign ownership.
-6. Stop when no supported in-scope reduction remains. Report actual coverage, reductions, retained uncertainty, and final
-   evidence; a valid no-change result is possible, not proof of global minimality. If a material decision or missing evidence
-   prevents required coverage/validation, record it as blocked rather than claiming completion. Otherwise use task completion
-   and archival rules. Resume interrupted work through the existing task ID and its recorded reduction contract.
+Resolve scope from supplied paths, a subsystem, current diff, or unambiguous context. If unclear, inspect enough to ask the
+missing scope question in plain text before editing; never assume the whole repository. Exclude unrelated user changes
+and generated/vendor code unless explicitly included. Create or resume one `.tasks/open/YYYYMMDD-short-slug.md` using the
+existing task schema: Goal, Acceptance, Design, Scope, Execution slices, Current state, Validation, Decisions; frontmatter
+id, status, queue, depends_on, created, updated. Record preserved behavior, reuse anchors, target design, baseline evidence,
+and slices; set executable work active, normally queue current, and update the index. Resume through the same task ID.
+
+Apply these named methods in dependency order, revisiting affected candidates as evidence changes. Program Reduction is
+also the overall objective; skip inapplicable operations rather than performing a full-repository sweep for each term.
+
+1. **Program Slicing**: trace required outputs, persisted effects, integrations, callers, and data dependencies. Untraced
+   code or absence of static references is not proof that code is dead.
+2. **Essential / Accidental Complexity**: distinguish necessary behavior from implementation-imposed layers, coupling,
+   state, and control flow. A necessary responsibility does not justify all of its current implementation.
+3. **YAGNI** and **Out of the Tar Pit**: identify speculative flexibility, duplicate flows/implementations, unnecessary
+   work, derived stored state, and synchronization. Investigate reuse and elimination before building new abstractions.
+4. **ablation study**: for significant structures, formulate an omission or replacement hypothesis and examine which
+   required result depends on them. Use bounded experiments and available checks; pending manual GUI evidence does not
+   require preserving the entire existing structure until the user can test it.
+5. **Program Reduction**: implement the simpler design through deletion, reuse, consolidation, reduced state/control flow,
+   and architecture replacement where useful. Preserve necessary identity/transaction/threading behavior, not redundant
+   scaffolding. Remove superseded paths as replacement slices complete; do not merely relocate complexity into new layers.
+6. **Delta Debugging**: when a reduction introduces a failure, narrow the responsible change and restore only what the
+   required behavior needs instead of abandoning the simplification. Preserve unrelated work; fix known regressions.
+
+For a large scope, inventory subsystem boundaries and investigate promising cross-file flows, forwarding chains, duplicate
+capabilities, and state synchronization before settling for cosmetic cleanup. Prioritize eliminated complexity relative to
+verification cost, not file size or easy line deletions alone. For material candidates, briefly record concrete anchors,
+preserved invariants, a simpler alternative, eliminated work/state/indirection, and a validation route in existing task
+sections. A retention reason must address the alternative, not merely say that history, identity, or transactions matter.
+Do not manufacture candidates or demand a report for every symbol. Whole-repository scope permits cross-subsystem redesign;
+implement coherent slices and re-examine affected callers and duplication when a reduction reveals another opportunity.
+
+Distinguish enumerated, investigated, modified, and verified coverage. Stop when promising candidates within the requested
+coverage have evidence-backed dispositions and no actionable candidate remains; one sweep or a passing build does not
+establish this. Resolve candidate uncertainty with bounded investigation where feasible and continue independent work.
+Report sampled/uninvestigated areas and concrete blockers honestly. No deletion/time quota, exhaustive search, or claim of
+global minimality; a supported no-change result is valid. Missing required investigation is not completed coverage.
+
+GUI acceptance belongs to the user. Lack of GUI access must not block development, redesign, or delivery. Complete source
+reasoning and available proportional build/static/existing-test checks, distinguishing baseline failures from regressions.
+Deliver concrete manual GUI flows and relevant event/state/lifecycle risks for the user to check. Never claim that a build
+proves GUI equivalence or that missing GUI evidence proves a deletion safe. A missing GUI tool alone is not a blocker;
+resolve known regressions and other concrete blockers normally. Continue implementation before requesting manual review.
+
+Report implementation/agent checks complete separately from manual GUI acceptance pending. When GUI acceptance is part
+of the task, leave it active with that pending condition in Current state; finish the turn without polling or inventing a
+paused status. Archive after the user reports the required acceptance and other conditions pass. If GUI acceptance is
+explicitly excluded from completion criteria, honor that scope. Otherwise apply ordinary task completion/archival rules.
 
 ## `ship`
 

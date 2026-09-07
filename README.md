@@ -23,10 +23,20 @@ has no unresolved material product or architecture choice, and Guide supplies it
 Design and execution prioritize verified reuse. Project-mandated components are binding; new structure needs a demonstrated
 capability gap. Reduction targets unnecessary code, state, and work while preserving behavior, not a line-count quota.
 
-`reduce` is an execution entry, while `redesign` develops replacement architecture and `clean` removes OpenCode Sessions.
-Select a directory, subsystem, current diff, or explicitly the whole repository. Reduce records a normal durable task,
-works through verifiable slices, and can resume via its task ID. It reports actual coverage, retained uncertainty, and
-validation; an omitted scope never silently authorizes a whole-repository edit. No extra Agent or Skill is involved.
+`reduce` directly authorizes internal architecture redesign and cleanup within the chosen scope; `redesign` develops a
+design before execution, and `clean` removes OpenCode Sessions. Reduce can change internal ownership, interfaces, and module
+boundaries while preserving required behavior, public/data contracts, and mandated components. It needs no second design
+approval. Select a directory, subsystem, current diff, or explicitly the whole repository; omitted scope is not global scope.
+
+Reduce applies **Program Slicing**, **Essential / Accidental Complexity**, **YAGNI** and **Out of the Tar Pit**, **ablation
+study**, **Program Reduction**, then **Delta Debugging** when a change fails. It prioritizes duplicate flows, redundant state,
+and unnecessary architecture over cosmetic cleanup, and records significant alternatives and evidence in the existing task.
+Enumerating a subsystem is not investigating it; a first sweep and a passing build do not establish exhausted opportunities.
+
+GUI acceptance belongs to the user. The agent completes development and available checks, then delivers specific manual GUI
+flows without claiming GUI equivalence. Missing GUI access does not block redesign or delivery. A task requiring manual GUI
+acceptance stays active with that pending condition until the user reports the result; no polling or extra status is added.
+Reduce resumes through its ordinary task ID. No extra Agent, Skill, ledger, or deletion quota is involved.
 
 ## OpenCode
 
