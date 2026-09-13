@@ -13,8 +13,9 @@ Use Git deliberately and preserve unrelated work. Classify the request before ac
 
 ## Read-only evidence
 
-Establish branch, worktree, relevant diff, and recent local message style before drawing a conclusion. Use the narrowest
-history command that answers the question: `git log -S` for an exact text change, `git log -G` for matching diff lines,
+Read only the branch, worktree, diff, or history needed for the question. Commit-message style matters only when preparing
+an authorized commit. Use the narrowest history command that answers the question: `git log -S` for an exact text change,
+`git log -G` for matching diff lines,
 `git blame -L` for line ownership, `git log --follow -- <path>` across a rename, and `git show <commit>` for the actual
 change. Cite the commit and path that support a history claim.
 

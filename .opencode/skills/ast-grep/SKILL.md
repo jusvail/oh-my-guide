@@ -11,9 +11,10 @@ for definitions, references, and symbol meaning.
 
 ## Availability and scope
 
-Use an already installed `ast-grep` executable. If it is unavailable, report the structural search or rewrite blocked; do
-not install a package, add a helper script, or substitute a text rewrite. Keep the query and paths inside the accepted
-task scope.
+Prefer an already installed `ast-grep` executable. If unavailable, use an existing syntax-aware tool or bounded manual
+inspection and editing when it can establish the same matches and transformation semantics. Text search can locate
+candidates but is not proof of a safe structural rewrite. Do not install packages or create tooling without authority.
+If equivalent evidence cannot be obtained, report only that search or rewrite blocked. Keep the work inside task scope.
 
 Patterns are code, not regular expressions. Use `$NAME` for one captured node and `$$$` for a sequence of nodes. Quote
 patterns in the shell so its `$` characters are preserved.

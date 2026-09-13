@@ -1,92 +1,96 @@
 # oh-my-guide
 
-A project-independent, evidence-grounded workflow for OpenCode and Codex. Guide owns intent and design; durable tasks
-separate accepted architecture from execution.
+A project-independent workflow for OpenCode and Codex. Guide resolves intent and design; execution completes the
+authorized result. Natural-language requests are sufficient. Use durable tasks only when cross-session recovery helps.
 
-## Shared workflow
+## Request routing
 
-- **Guide** owns the user conversation, evidence synthesis, solution architecture, project knowledge, and durable task
-  contract. It does not edit product code.
-- **Task execution** adopts an accepted contract, edits its complete scope, and validates the final worktree without
-  inventing material product decisions.
-- `.tasks/` is the only cross-session ledger. There are no execution locks, Session owners, checkpoints, handoff states,
-  or paused tasks.
+- Questions, reviews, status, and advice receive direct answers without implementation or task writes.
+- Explicit guide/redesign requests stay design-only until the user requests implementation.
+- A clear implementation request proceeds through material design decisions, implementation, and proportional validation
+  without a command-prefix requirement or another generic approval.
+- Small self-contained changes use quick execution. Sustained objectives use a concise durable task.
+- Specific utility requests authorize only their named effects: a commit request does not imply a push.
 
-Each independently executable objective uses `.tasks/open/YYYYMMDD-short-slug.md` with Goal, Acceptance, Design, Scope,
-Execution slices, Current state, Validation, and concise Decisions. Status is `designing`, `ready`, `active`, or `blocked`;
-queue is independently `current` or `deferred`. Terminal tasks move to `.tasks/archive/YYYY-MM/`.
+Routine engineering choices and conflicts settled by instruction priority do not require user decisions. Ask only for
+unresolved material choices, incompatible requirements of equal authority, or new authority. Preserve settled choices and
+authorization across turns, and continue independent work when one part is blocked.
 
-Guide accepts rough ideas, recommends meaningful options, and automatically updates task state as discussion changes the
-requirements. Task updates need no save request; saving long-term context or instructions remains explicit. A ready task
-has no unresolved material product or architecture choice, and Guide supplies its execution command and dependency order.
+## Durable work
 
-Design and execution prioritize verified reuse. Project-mandated components are binding; new structure needs a demonstrated
-capability gap. Reduction targets unnecessary code, state, and work while preserving behavior, not a line-count quota.
+`.tasks/` is the only cross-session ledger. Use it for sustained objectives, explicit task preservation, and existing
+task resumption, not every conversation. There are no execution locks, runtime owners, checkpoints, or handoff records.
 
-`reduce` directly authorizes internal architecture redesign and cleanup within the chosen scope; `redesign` develops a
-design before execution, and `clean` removes OpenCode Sessions. Reduce can change internal ownership, interfaces, and module
-boundaries while preserving required behavior, public/data contracts, and mandated components. It needs no second design
-approval. Select a directory, subsystem, current diff, or explicitly the whole repository; omitted scope is not global scope.
+A task at `.tasks/open/YYYYMMDD-short-slug.md` records Goal, Acceptance, Design, Scope, Execution slices, Current state,
+Validation, and concise Decisions. Status is designing, ready, active, or blocked; queue is independently current or
+deferred. Terminal tasks move to `.tasks/archive/YYYY-MM/`.
 
-Reduce applies **Program Slicing**, **Essential / Accidental Complexity**, **YAGNI** and **Out of the Tar Pit**, **ablation
-study**, **Program Reduction**, then **Delta Debugging** when a change fails. It prioritizes duplicate flows, redundant state,
-and unnecessary architecture over cosmetic cleanup, and records significant alternatives and evidence in the existing task.
-Enumerating a subsystem is not investigating it; a first sweep and a passing build do not establish exhausted opportunities.
+Merge material changes into one update per turn or execution batch and edit only affected sections. Refresh the index
+only when its displayed entries change. Context and instruction saves still require an explicit request; natural language
+is sufficient. Read task state when it helps resumption, without rewriting it merely to answer status.
 
-GUI acceptance belongs to the user. The agent completes development and available checks, then delivers specific manual GUI
-flows without claiming GUI equivalence. Missing GUI access does not block redesign or delivery. A task requiring manual GUI
-acceptance stays active with that pending condition until the user reports the result; no polling or extra status is added.
-Reduce resumes through its ordinary task ID. No extra Agent, Skill, ledger, or deletion quota is involved.
+## Bounded execution and validation
+
+Read evidence and instructions relevant to the current question, reuse current context, and check affected worktree
+changes before editing. Do not require repository inventories or history checks for every change.
+
+Prefer verified reuse and local simplification. Mandated components are binding. Ordinary changes do not require a
+reduction-method checklist. Tests and optional work follow the accepted task and project instructions.
+
+Explicit reduce authorizes internal architecture redesign within its scope while preserving required behavior,
+public/data contracts, lifecycle semantics, integrations, and mandated components. State acceptance and coverage before
+editing. Use tracing, omission experiments, or failure reduction only when useful. Stop after that coverage and acceptance
+are satisfied and introduced regressions are resolved; additional opportunities become suggestions unless broader
+exploration was requested. Report real coverage and verification limits without claiming global minimality.
+
+Run proportional checks, expanding or repeating them only for changes, failures, or unresolved concerns. Perform available
+objective GUI checks using applicable platform instructions and verified targets. Recovery addresses actual failures;
+missing cosmetic indicators or a retry quota do not justify repeated restarts. Equivalent available tools may be used
+when they preserve target identity, isolation, and required evidence.
+
+Missing GUI access blocks only the corresponding evidence. Complete independent work, report the exact manual flow, and
+leave an existing task active only if required evidence or explicitly requested subjective acceptance remains pending.
+Do not poll for user review or claim that a build proves GUI equivalence.
 
 ## OpenCode
 
-The OpenCode release remains built around three Agents:
+The release has three Agents:
 
-- **Guide** performs routine inspection directly and invokes the bounded **Scout** only for material external, visual,
-  build, or feasibility evidence whose value justifies delegation.
-- **Scout** returns evidence without owning design, implementation, or user dialogue.
-- **Task** is the execution engine for accepted work and explicit utility commands.
+- **Guide** owns user dialogue and design. It gathers routine evidence directly and calls Task when implementation or
+  a utility is authorized; it never edits product code itself.
+- **Scout** returns one bounded evidence result when the value of delegated external, visual, build, or feasibility
+  work justifies it.
+- **Task** executes the authorized scope. It supports both direct use and invocation by Guide (`mode: all`);
+  Guide's task permission allows only Scout and Task.
 
-Available commands:
+Guide passes a small change as quick with its scoped request, or sustained work as task with its durable ID, authority,
+and evidence anchors. Explicit utility commands remain available:
 
-- `/guide <thought>` and `/redesign <objective>` — continue design.
-- `/task <task-id>` — execute an accepted durable task.
-- `/quick <request>` — execute one small, self-contained change.
-- `/reduce <scope>` — directly simplify existing code while preserving required behavior.
-- `/ship [message]` — inspect, stage, commit, and push.
-- `/clean [all]` — remove stale OpenCode Sessions or every Session except the current one.
+- `/guide <thought>`, `/redesign <objective>` — design only until implementation is requested.
+- `/task <task-id>` — execute or resume a durable task.
+- `/quick <request>` — execute a small change.
+- `/reduce <scope>` — perform scoped reduction.
+- `/ship [message]` — stage all current changes, commit, and push.
+- `/clean [all]` — remove stale OpenCode Sessions, or every Session except the current one.
 
-OpenCode package defaults live in `preferences/core.md`; the installed `preferences/user.md` remains user-owned. Its four
-on-demand Skills are Browser, Debugging, Git, and AST-Grep.
+The mode and task permission configuration follow [OpenCode's agent configuration](https://opencode.ai/docs/agents/#mode).
+Package defaults live in `preferences/core.md`; installed `preferences/user.md` remains user-owned. Browser, Debugging,
+Git, and AST-Grep are available for concrete matching needs. Debugging continues when new evidence supports another
+hypothesis; unavailable tools allow equivalent existing capabilities without weakening isolation or structural evidence.
 
 ## Codex
 
-The Codex release contains one Skill, `oh-my-guide`, and no custom Agent, plugin, slash command, or Scout runtime.
-Installation adds a marked block to the active global Codex instruction file so every fresh conversation silently starts
-in Guide. The user enters only the natural request—no Skill prefix, bootstrap prompt, or activation message is required.
+The release contains one Skill, `oh-my-guide`, and no custom Agent, plugin, slash command, or Scout runtime.
+Installation adds a marked global instruction block that routes natural requests silently. One-off answers stay direct;
+project work loads the relevant design or execution guidance. Authorized implementation proceeds in the current runtime.
 
-Explicit modes:
+Explicit `$oh-my-guide guide`, `redesign`, `task`, `quick`, `reduce`, and `ship` remain optional shortcuts with the same
+semantics as above. There is no Codex Session-cleaning mode. Skill instructions operate under Codex's sandbox and approval
+policy; they cannot enforce OpenCode's per-Agent permissions.
 
-- `$oh-my-guide redesign <objective>` — derive replacement structure from accepted behavior.
-- `$oh-my-guide task <task-id>` — accept and execute one durable task.
-- `$oh-my-guide quick <request>` — execute one bounded decision-free change.
-- `$oh-my-guide reduce <scope>` — directly perform scoped behavior-preserving cleanup.
-- `$oh-my-guide ship [message]` — inspect, stage, commit, and push.
-
-Codex Skills cannot enforce OpenCode-style per-Agent tool permissions, so Guide-versus-execution separation is an
-instruction contract under Codex's sandbox and approval policy. Codex has no oh-my-guide Session-cleaning mode.
-
-The instructions target GPT-5.6 Sol and GPT-6 Astra with the same outcome-led contract: clear reuse constraints, progressive
-Guide dialogue, autonomous local execution, and proportional validation. Descriptions do not select a model. Codex uses
-the user's runtime selection; the OpenCode recommended profile retains its existing models until provider availability
-for a revised mapping is verified. Static package checks do not establish model behavior or prompt efficacy.
-
-### Superpowers compatibility
-
-Superpowers does not need to be uninstalled. Default Guide owns process selection, preventing automatic Superpowers
-brainstorming, planning, TDD, worktree, subagent, review, and branch-finishing workflows from creating a competing process
-for the same objective. Explicitly invoking a Superpowers Skill or asking to use Superpowers suspends oh-my-guide for that
-objective, so the plugin remains available without either package modifying the other.
+The instructions target GPT-5.6 Sol and GPT-6 Astra without selecting a model. Codex uses the user's runtime choice;
+the OpenCode recommended profile retains its existing settings. Static package checks and installation checks establish
+structure and packaging, not model behavior or prompt efficacy.
 
 ## Install
 
@@ -102,12 +106,8 @@ Install OpenCode additively into `~/.config/opencode`:
 bash scripts/install.sh
 ```
 
-Default OpenCode installation updates only manifest-owned files and preserves unrelated Agents, commands, Skills,
-scripts, Preferences, plugins, instructions, and `opencode.json`. Explicit takeover keeps its existing behavior:
-
-```bash
-bash scripts/install.sh --takeover
-```
+Default installation updates only manifest-owned files and preserves unrelated Agents, commands, Skills, preferences,
+plugins, instructions, and configuration. Explicit `bash scripts/install.sh --takeover` retains its replacement behavior.
 
 Install only the Codex release:
 
@@ -115,9 +115,9 @@ Install only the Codex release:
 bash scripts/install.sh --codex
 ```
 
-Codex installation updates only `$HOME/.agents/skills/oh-my-guide`, its package manifest, and one marked block at the
-start of the active global `${CODEX_HOME:-$HOME/.codex}/AGENTS.override.md` or `AGENTS.md`. It preserves all content outside
-that block and never edits Codex configuration, plugins, project instructions, or Superpowers files.
+Codex installation updates only `$HOME/.agents/skills/oh-my-guide`, its manifest, and one marked block at the start of the
+active global `${CODEX_HOME:-$HOME/.codex}/AGENTS.override.md` or `AGENTS.md`. It preserves content outside that block,
+Codex configuration, plugins, and project instructions. Editing this source repository does not update active installs.
 
 Use project-local destinations for isolated installation checks:
 

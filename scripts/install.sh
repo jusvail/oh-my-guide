@@ -75,8 +75,6 @@ check_sources()
     [[ -f "${root}/releases/codex/default-guide.md" ]] || fail "Missing Codex default Guide bootstrap."
     grep -Fq -- 'Do not ask the user to enter' "${root}/releases/codex/default-guide.md" || \
         fail "Invalid Codex default Guide bootstrap."
-    grep -Fq -- 'Superpowers' "${root}/releases/codex/default-guide.md" || \
-        fail "Missing Codex Superpowers boundary."
     [[ ! -e "${root}/releases/codex/agents" ]] || fail "Codex release must not define Agents."
     [[ ! -e "${root}/releases/codex/.codex-plugin" ]] || fail "Codex release must not define a plugin."
     ! grep -Fqx -- "${codex_block_start}" "${root}/releases/codex/default-guide.md" || \

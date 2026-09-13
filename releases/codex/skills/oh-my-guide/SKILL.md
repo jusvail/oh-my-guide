@@ -1,33 +1,28 @@
 ---
 name: oh-my-guide
-description: Guides rough ideas into evolving executable tasks; supports accepted task execution, quick changes, scoped reduction, and shipping.
+description: Guide project design and execute requested changes, durable tasks, scoped reduction, or shipping.
 ---
 
 # oh-my-guide
 
-Do not announce activation. Read `references/core.md`, then select exactly one mode.
+Do not announce activation. Select the route from the user's intent; no command prefix is required.
 
-## Mode selection
+## Routing
 
-- With no explicit oh-my-guide mode, use **guide** for the user's natural request.
-- `guide <thought>` continues evidence-grounded design.
-- `redesign <objective>` uses Guide while deriving replacement structure from accepted behavior.
-- `task <YYYYMMDD-short-slug>` executes one ready durable task.
-- `quick <request>` executes one small, self-contained, decision-free change without durable task state.
-- `reduce <scope>` directly executes behavior-preserving cleanup with a durable task.
-- `ship [message]` inspects, stages, commits, and pushes the current coherent worktree.
-- Any other explicit mode returns only this usage; there is no Codex `clean` mode.
-
-For `guide` or `redesign`, read and follow `references/guide.md`. For `task`, `quick`, `reduce`, or `ship`, read and follow
-`references/task.md`. Apply only the selected mode.
+- Answer one-off questions, reviews, status, and advice directly. Read only evidence needed for the answer; do not
+  create task state or implement unless requested.
+- For project design or implementation, read `references/core.md`. Use `references/guide.md` for unresolved design
+  and durable task maintenance. When implementation is requested and material choices are settled, proceed with
+  `references/task.md` in this runtime without another approval.
+- A small, self-contained change uses quick execution without task files. Sustained work uses a durable task.
+- Explicit `guide <thought>` and `redesign <objective>` are design-only until the user requests implementation.
+- `task <YYYYMMDD-short-slug>` executes or resumes a durable task; a natural-language request can identify the same task.
+- `quick <request>`, `reduce <scope>`, and `ship [message]` use the corresponding section of `references/task.md`.
+- Specific authorized utility actions also use `references/task.md`; do not turn a commit-only request into ship.
+- Unsupported explicit modes return concise usage; there is no Codex clean mode.
 
 ## Workflow boundary
 
-Direct user requests and loaded global/project `AGENTS.md` files remain more specific than this Skill. Do not delegate or
-create a custom Agent. Guide performs bounded evidence gathering directly; execution remains in the current Codex runtime
-and under its sandbox and approval policy.
-
-oh-my-guide is the process owner unless the user explicitly invokes another workflow. Do not automatically invoke
-Superpowers process Skills while this Skill owns the objective. If the user explicitly selects a Superpowers Skill or asks
-to use Superpowers, suspend oh-my-guide for that objective so the requested workflow can run without competing ledgers or
-gates.
+The current request and loaded global/project instructions govern scope and authority. Preserve authorization and
+settled decisions across turns. Do not delegate or create a custom Agent; execution stays in the current Codex runtime
+under its sandbox and approval policy. A user-selected alternative workflow takes precedence for that objective.

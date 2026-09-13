@@ -28,8 +28,10 @@ stack another workaround on it.
 ## Correct and validate
 
 Fix the real owner within the accepted scope, then rerun the original observation and the proportional final-worktree
-verification required by the engineering preference contract. After one evidence-based repair and rerun still leaves the
-same failure, stop and report the observed facts, failed assumption, and remaining gap.
+verification required by the engineering preference contract. If the failure remains, use new evidence to revise the
+hypothesis and continue within scope. Stop when no useful evidence-gathering step remains, necessary access or information
+is missing, or the next action requires a material scope or authority change. Report the failed assumption and remaining
+gap; do not repeat the same repair without new evidence or stop solely because one repair failed.
 
 Do not require TDD, agent-authored product tests, monitoring, retries, compatibility, or defensive work unless the current
 request, accepted contract, or concrete in-scope failure requires it.

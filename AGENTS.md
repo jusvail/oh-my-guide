@@ -15,8 +15,7 @@ Keep this package project-independent and make only the requested bounded change
 
 Preserve the OpenCode release when changing Codex. Codex installation may own only its `oh-my-guide` Skill, manifest, and
 marked global instruction block. Preserve unrelated Skills, all user instruction content outside that block, Codex
-configuration, plugins, project instructions, and Superpowers. Default Guide and Superpowers are exclusive process owners
-for one objective; explicit user selection decides between them.
+configuration, plugins, and project instructions.
 
 Do not add a reasoning-phase command, framework profile, project path, compatibility alias, execution lock, checkpoint,
 runtime owner, or routine acceptance gate. `.tasks/` remains the only durable coordination contract.

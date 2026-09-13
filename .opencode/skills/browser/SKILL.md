@@ -15,12 +15,14 @@ Before opening a browser, name one target URL, one bounded acceptance path, its 
 an external effect. Do not browse speculatively, explore unrelated routes, log in, upload, submit data, or trigger an
 external side effect unless the accepted task explicitly requires that exact action.
 
-Check that `agent-browser` is already available. If it is unavailable, report browser validation blocked; do not install
-it, start a service, or substitute an authenticated or persistent browser.
+Prefer an already available `agent-browser`. If unavailable, use another available interaction tool only if it provides
+equivalent target identification, current page evidence, ephemeral isolation, and cleanup. Do not substitute an
+authenticated or persistent user browser. Tool absence blocks only evidence with no equivalent route, not independent
+work. Installation requires authority; an authorized local product startup does not require a separate utility mode.
 
 ## Isolated operation
 
-Use one unique ephemeral session and operate it directly:
+With agent-browser, use one unique ephemeral session and operate it directly:
 
 ```bash
 mkdir -p .tmp
@@ -32,7 +34,7 @@ agent-browser --session <task-run> screenshot .tmp/<task-run>-final.png
 agent-browser --session <task-run> close
 ```
 
-- Use the current accessibility snapshot and its semantic `@` reference for every interaction. Refresh the snapshot after
+- Use current semantic page evidence for every interaction (snapshot `@` references with agent-browser). Refresh after
   navigation or a material DOM change; do not guess selectors or coordinates.
 - Use a semantic wait for the declared expected state rather than arbitrary delays.
 - Create project-root `.tmp/` before capture and keep every screenshot or browser artifact there. Remove temporary
@@ -43,7 +45,8 @@ agent-browser --session <task-run> close
 
 Do not use `agent-browser install`, `--profile`, `--session-name`, `state save/load`, cookie or storage commands,
 `--cdp`, extensions, cloud providers, stealth behavior, proxy bypass, or a user browser session. This Skill never creates
-persistent browser state or a background service.
+persistent browser state or a browser service. Authorized product startup remains part of task execution.
 
-If the path cannot be completed with the declared target and current semantic evidence, stop and report the last verified
-state. Do not widen the task or retry through another interaction channel.
+Recover or use an equivalent available tool when new evidence supports another attempt within the same target, scope,
+isolation, and authority. Do not repeat unchanged failures or widen the task. If no supported route remains, report
+browser validation blocked and the last verified state; continue independent authorized work.
