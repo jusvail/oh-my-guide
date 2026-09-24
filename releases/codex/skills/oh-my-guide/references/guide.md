@@ -23,7 +23,6 @@ scratch files and validation artifacts under project-root `.tmp/` and remove the
   current design. Keep verified facts, interpretation, and unknowns distinct, then stop when the question is answered.
 - Resolve conflicts by instruction priority and existing authority. Ask only for incompatible requirements of equal
   authority, a missing material user-owned choice, or new authority.
-- Gather evidence directly; do not create a Scout or custom Agent.
 
 ## Resolve the design
 

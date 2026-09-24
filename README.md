@@ -1,11 +1,11 @@
 # oh-my-guide
 
-A project-independent workflow for OpenCode and Codex. Guide actively turns project thoughts into continuously updated,
+A project-independent workflow for Claude Code and Codex. Guide actively turns project thoughts into continuously updated,
 instruction-aware tasks; execution completes an explicitly confirmed ready task. Natural language is sufficient.
 
 ## Request routing
 
-- Pure general-knowledge questions and read-only task/status lookups receive direct answers without task writes.
+- Pure general-knowledge questions and read-only lookups receive direct answers without task writes.
 - Any distinct project design, change, investigation, or direction objective enters Guide and creates or updates a task;
   initial implementation wording does not bypass design ownership.
 - Guide asks one highest-impact material product/design question at a time and updates the task before advancing. Agents
@@ -14,17 +14,17 @@ instruction-aware tasks; execution completes an explicitly confirmed ready task.
   assent does not authorize implementation. Explicit quick/task/reduce/utility modes retain their stated direct authority.
 - Specific utility requests authorize only their named effects: a commit request does not imply a push.
 
-At a new objective, context loss, or scope/instruction change, Guide and Task read applicable loaded/repository instructions
-and the project instruction index plus affected topics when present. They reuse unchanged instructions, apply instruction
-priority, and never ask the user to restate an available rule. Only unresolved material product, architecture, scope,
-compatibility, or user-visible tradeoffs require a user decision.
+At a new objective, context loss, or scope/instruction change, Guide and execution read applicable loaded/repository
+instructions and the project instruction index plus affected topics when present. They reuse unchanged instructions,
+apply instruction priority, and never ask the user to restate an available rule. Only unresolved material product,
+architecture, scope, compatibility, or user-visible tradeoffs require a user decision.
 
 ## Durable work
 
-`.tasks/` is the only durable ledger. Create a task as soon as a distinct project design, change, investigation, or
-direction objective appears, not only when cross-session recovery becomes necessary. Pure general knowledge, read-only
-status, and explicit quick work are the bounded exceptions. There are no execution locks, runtime owners, checkpoints, or
-handoff records.
+`.tasks/` is the only durable ledger, shared by both runtimes. Create a task as soon as a distinct project design, change,
+investigation, or direction objective appears, not only when cross-session recovery becomes necessary. Pure general
+knowledge, read-only lookups, and explicit quick work are the bounded exceptions. There are no execution locks, runtime
+owners, checkpoints, or handoff records.
 
 A task at `.tasks/open/YYYYMMDD-short-slug.md` records Goal, Acceptance, Design, Scope, Execution slices, Current state,
 Validation, and concise Decisions. Status is designing, ready, active, or blocked; queue is independently current or
@@ -35,8 +35,8 @@ superseded operative text and keep Current state as a recovery summary, not a tr
 entry changes. Context and instruction saves still require an explicit request; reading status alone does not rewrite it.
 
 Mark a task ready only when acceptance, material design, scope, slices, and validation are executable without guessing a
-user-owned choice. Guide then presents `/task <id>` or `$oh-my-guide task <id>`; that command or a clear instruction to
-execute the identified ready task is the single confirmation handoff.
+user-owned choice. Guide then presents `/task <id>` in Claude Code or `$oh-my-guide task <id>` in Codex; that command or a
+clear instruction to execute the identified ready task is the single confirmation handoff.
 
 ## Bounded execution and validation
 
@@ -58,53 +58,48 @@ are satisfied and introduced regressions are resolved; additional opportunities 
 exploration was requested. Report real coverage and verification limits without claiming global minimality.
 
 Run proportional checks, expanding or repeating them only for changes, failures, or unresolved concerns. Perform available
-objective GUI checks using applicable platform instructions and verified targets. Recovery addresses actual failures;
-missing cosmetic indicators or a retry quota do not justify repeated restarts. Equivalent available tools may be used
-when they preserve target identity, isolation, and required evidence.
+objective GUI checks using applicable platform instructions and verified targets. Missing GUI access blocks only the
+corresponding evidence. Complete independent work, report the exact manual flow, and leave an existing task active only
+if required evidence or explicitly requested subjective acceptance remains pending. Do not poll for user review or claim
+that a build proves GUI equivalence.
 
-Missing GUI access blocks only the corresponding evidence. Complete independent work, report the exact manual flow, and
-leave an existing task active only if required evidence or explicitly requested subjective acceptance remains pending.
-Do not poll for user review or claim that a build proves GUI equivalence.
+## Claude Code
 
-## OpenCode
+The release contains eight personal Skills and one marked block in the global `CLAUDE.md`. It adds no Agent, plugin,
+hook, output style, or settings change.
 
-The release has three Agents:
+- The `CLAUDE.md` block routes project objectives into Guide without a command and carries the engineering preferences.
+  It omits rules Claude Code already enforces, such as commit authority and scratch-file placement.
+- `guide` is the only workflow Skill Claude invokes on its own. It runs in the main conversation, writes only `.tasks/`
+  while designing, and states that it relies on asking, so auto mode does not turn user-owned choices into assumptions.
+- `/redesign`, `/task`, `/quick`, `/reduce`, and `/ship` are user-only (`disable-model-invocation`), so Claude cannot start
+  execution by itself. `/ship` pre-approves only `git add -A`, `git commit`, and `git push`.
+- `debugging` and `ast-grep` load when their descriptions match the work.
 
-- **Guide** owns user dialogue, instruction-aware design, and continuous task maintenance. It gathers routine evidence
-  directly and calls Task only after the ready task is explicitly confirmed; it never edits product code itself.
-- **Scout** returns one bounded evidence result when the value of delegated external, visual, build, or feasibility
-  work justifies it.
-- **Task** executes the authorized scope. It supports both direct use and invocation by Guide (`mode: all`);
-  Guide's task permission allows only Scout and Task.
+Commands:
 
-Default project work remains in Guide until the task handoff. Explicit utility commands remain available:
-
-- `/guide <thought>`, `/redesign <objective>` — design only and continuously maintain the task.
-- `/task <task-id>` — execute or resume a durable task.
+- `/guide <thought>`, `/redesign <objective>` — design only, continuously maintaining the task.
+- `/task <task-id>` — execute or resume a ready task. A task file is the whole contract, so `/clear` followed by
+  `/task <task-id>` executes it in a fresh context.
 - `/quick <request>` — execute a small change.
 - `/reduce <scope>` — perform scoped reduction.
 - `/ship [message]` — stage all current changes, commit, and push.
-- `/clean [all]` — remove stale OpenCode Sessions, or every Session except the current one.
 
-The mode and task permission configuration follow [OpenCode's agent configuration](https://opencode.ai/docs/agents/#mode).
-Package defaults live in `preferences/core.md`; installed `preferences/user.md` remains user-owned. Browser, Debugging,
-Git, and AST-Grep are available for concrete matching needs. Debugging continues when new evidence supports another
-hypothesis; unavailable tools allow equivalent existing capabilities without weakening isolation or structural evidence.
+Claude Code's `cleanupPeriodDays` setting handles old transcripts. The text is written for current Claude models: each
+rule is stated once with its reason, and Claude Code's built-in behavior is not restated.
 
 ## Codex
 
-The release contains one Skill, `oh-my-guide`, and no custom Agent, plugin, slash command, or Scout runtime.
-Installation adds a marked global instruction block that silently routes natural project requests into Guide. Pure general
-knowledge and read-only status remain direct; project objectives create and continuously update tasks. Confirmed ready-task
-implementation proceeds in the current runtime.
+The release contains one Skill, `oh-my-guide`, and no custom Agent, plugin, or slash command. Installation adds a marked
+global instruction block that silently routes natural project requests into Guide. Pure general knowledge and read-only
+lookups remain direct; project objectives create and continuously update tasks. Confirmed ready-task implementation
+proceeds in the current runtime.
 
 Explicit `$oh-my-guide guide`, `redesign`, `task`, `quick`, `reduce`, and `ship` remain optional shortcuts with the same
-semantics as above. There is no Codex Session-cleaning mode. Skill instructions operate under Codex's sandbox and approval
-policy; they cannot enforce OpenCode's per-Agent permissions.
+semantics as above. Skill instructions operate under Codex's sandbox and approval policy.
 
-The instructions target GPT-5.6 Sol and GPT-6 Astra without selecting a model. Codex uses the user's runtime choice;
-the OpenCode recommended profile retains its existing settings. Static package checks and installation checks establish
-structure and packaging, not model behavior or prompt efficacy.
+The Codex instructions target GPT-5.6 Sol and GPT-6 Astra without selecting a model; Codex uses the user's runtime choice.
+Static package checks and installation checks establish structure and packaging, not model behavior or prompt efficacy.
 
 ## Install
 
@@ -114,16 +109,18 @@ Validate both release sources without installation:
 bash scripts/install.sh --check
 ```
 
-Install OpenCode additively into `~/.config/opencode`:
+Install the Claude Code release globally:
 
 ```bash
-bash scripts/install.sh
+bash scripts/install.sh --claude
 ```
 
-Default installation updates only manifest-owned files and preserves unrelated Agents, commands, Skills, preferences,
-plugins, instructions, and configuration. Explicit `bash scripts/install.sh --takeover` retains its replacement behavior.
+Claude Code installation writes the Skills into `${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills/`, records them in
+`.oh-my-guide-manifest` there, and places one marked block at the start of `CLAUDE.md` in the same directory. It refuses to
+replace a same-named Skill it does not own, removes Skills it owned that the release no longer ships, and preserves other
+Skills, content outside the block, settings, and plugins.
 
-Install only the Codex release:
+Install the Codex release:
 
 ```bash
 bash scripts/install.sh --codex
@@ -131,15 +128,16 @@ bash scripts/install.sh --codex
 
 Codex installation updates only `$HOME/.agents/skills/oh-my-guide`, its manifest, and one marked block at the start of the
 active global `${CODEX_HOME:-$HOME/.codex}/AGENTS.override.md` or `AGENTS.md`. It preserves content outside that block,
-Codex configuration, plugins, and project instructions. Editing this source repository does not update active installs.
+Codex configuration, plugins, and project instructions.
 
-Use project-local destinations for isolated installation checks:
+Editing this source repository does not update active installs; rerun the target after changes. Use project-local
+destinations for isolated installation checks:
 
 ```bash
-OH_MY_GUIDE_OPENCODE_DIR="$PWD/.tmp/opencode" bash scripts/install.sh
+OH_MY_GUIDE_CLAUDE_DIR="$PWD/.tmp/claude" bash scripts/install.sh --claude
 OH_MY_GUIDE_CODEX_SKILLS_DIR="$PWD/.tmp/agents/skills" \
 OH_MY_GUIDE_CODEX_DIR="$PWD/.tmp/codex" \
 bash scripts/install.sh --codex
 ```
 
-Restart the selected application after installation.
+Start a new session of the selected application after installation.

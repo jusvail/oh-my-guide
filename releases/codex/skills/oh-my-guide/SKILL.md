@@ -18,7 +18,7 @@ enter the default Guide conversation.
   language instruction to execute an identified ready task is equivalent; vague assent is not.
 - Explicit `quick <request>`, `reduce <scope>`, and `ship [message]` use their sections of `references/task.md` and carry
   only their stated authority. Specific utility requests also use execution guidance without expanding their effects.
-- Unsupported explicit modes return concise usage; there is no Codex clean mode.
+- Unsupported explicit modes return concise usage.
 
 ## Workflow boundary
 
