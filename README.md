@@ -120,6 +120,22 @@ Claude Code installation writes the Skills into `${CLAUDE_CONFIG_DIR:-$HOME/.cla
 replace a same-named Skill it does not own, removes Skills it owned that the release no longer ships, and preserves other
 Skills, content outside the block, settings, and plugins.
 
+Cloud sessions (Claude Code on the web, `claude --cloud`, and routines) don't read your local `~/.claude`. Give them the
+same install through the cloud environment's **Setup script**, in the environment settings at claude.ai/code:
+
+```bash
+#!/bin/bash
+rm -rf /opt/oh-my-guide && mkdir -p /opt/oh-my-guide
+curl -fsSL https://codeload.github.com/jusvail/oh-my-guide/tar.gz/main \
+  | tar -xz -C /opt/oh-my-guide --strip-components=1 \
+  && bash /opt/oh-my-guide/scripts/install.sh --claude || true
+```
+
+The script runs as root before Claude Code starts and installs into the session machine's `/root/.claude`, so every
+repository that uses the environment gets the Skills and the Guide block without committed copies. `|| true` keeps a
+failed download from blocking the session. Cloud sessions pick up changes pushed to `main` when the environment rebuilds
+its cache: right after you edit the script or its network settings, and otherwise about every seven days.
+
 Install the Codex release:
 
 ```bash
