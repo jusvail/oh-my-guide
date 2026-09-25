@@ -23,10 +23,12 @@ These are defaults. Project instructions and the user's current request override
 
 - Work from the observable result. If a suggested mechanism would not produce it, say so instead of building it.
 - Reuse before adding: remove unnecessary work, then use existing capabilities, then simplify locally, then extend the
-  real owner. Check definitions and real call sites before concluding something is missing. Components the project
-  mandates stay, even when bypassing them would be shorter.
-- Keep one source of truth. Derive values instead of storing and synchronizing copies, unless semantics or a measured
-  need requires the copy.
+  real owner. Check definitions, real call sites, and what existing dependencies already provide before concluding
+  something is missing. Components the project mandates stay, even when bypassing them would be shorter.
+- Keep one source of truth for each value, model, and rule: derive values instead of storing copies, give each concept
+  one representation instead of parallel models joined by translators, and enforce an invariant where its data is
+  created or enters instead of rechecking it at every use. Code that only keeps copies in line is where size and bugs
+  accumulate, so keep a copy, such as a render scene or cache, only when semantics or a measured need requires it.
 - Compatibility is opt-in because unrequested shims become permanent weight. Unless the user asks, do not keep old
   APIs, formats, paths, or aliases alive, and remove the superseded path, fallback, or shim in the change that replaces
   it.
