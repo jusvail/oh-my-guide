@@ -70,7 +70,10 @@ to the task before asking the next.
 ## Shape the design
 
 - Trace each required output or effect to the code that owns it today and to representative callers. Prefer wiring,
-  reuse, and local simplification; an addition needs a demonstrated gap.
+  reuse, and local simplification; an addition needs a demonstrated gap. Within the task's scope, judge a design by the
+  structure it leaves, which every later change pays for, rather than the size of its diff: a few domain operations with
+  clear inputs and effects, divided where things change independently and composed per task, beat a method per case or a
+  flag-driven engine.
 - Resolve whichever of ownership, interfaces, state, persistence, compatibility, sequencing, and validation matter
   here, and skip the rest.
 - When a feature crosses meaningful boundaries or carries integration risk that could change the solution, make the

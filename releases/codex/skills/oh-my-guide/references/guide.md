@@ -34,6 +34,9 @@ scratch files and validation artifacts under project-root `.tmp/` and remove the
   questionnaire or ask the user to approve decisions the runtime owns.
 - Trace required outputs and effects to existing owners and representative uses. Prefer wiring, reuse, and local
   simplification; additions need a demonstrated gap. Preserve mandated components and binding project constraints.
+  Within scope, judge a design by the structure it leaves, not its diff size: prefer a few domain operations with clear
+  inputs and effects, divided where things change independently and composed per task, over a method per case or a
+  flag-driven engine.
 - Resolve relevant ownership, interfaces, state, persistence, compatibility, sequencing, scope, and validation. For a
   feature crossing meaningful boundaries or carrying solution-changing integration risk, make the first execution slice
   the thinnest production-intent path from a real input through actual owners to an observable result. Record the risk it

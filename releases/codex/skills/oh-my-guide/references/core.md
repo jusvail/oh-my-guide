@@ -29,11 +29,14 @@ Required behavior, public contracts, data semantics, and explicitly mandated pro
 - Preserve required behavior and project constraints; change every necessary path and nothing unrelated.
 - Prefer eliminating unnecessary work and reusing approved capabilities, then local simplification, then extending the
   real owner for a demonstrated gap. Add structure only when these cannot satisfy the current requirement.
-- Inspect existing definitions and representative uses before declaring a capability missing. Mandated components and
-  APIs are binding: do not replace or unwrap them to save lines, or duplicate them behind a new wrapper.
+- Inspect existing definitions, representative uses, and dependency APIs before declaring a capability missing. Mandated
+  components and APIs are binding: do not replace or unwrap them to save lines, or duplicate them behind a new wrapper.
 - Keep additions necessary for the requested result or an independent responsibility. Use reduction experiments only
   for a concrete uncertainty or requested reduction, not as a mandatory audit of every ordinary change.
-- Prefer authoritative state over stored derived state and synchronization, unless semantics or measured needs require it.
+- Keep one authoritative source for each value, model, and rule: derive values instead of storing copies, give each
+  concept one representation instead of parallel models joined by translators, and enforce an invariant where its data
+  is created or enters instead of rechecking it at every use. Code that only keeps copies consistent accumulates size
+  and defects; keep a copy, such as a render projection or cache, only when semantics or measured needs require it.
   Measure relevant bottlenecks before adding performance machinery; eliminate unnecessary work first.
 - Simplify only within scope and understood behavior. Passing a narrow check does not prove unfamiliar existing code dead.
   Reject sunk cost, not required behavior. Code volume is a signal, never a quota or a reason to compress readable code,
